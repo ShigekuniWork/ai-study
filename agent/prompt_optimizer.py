@@ -57,6 +57,5 @@ def main():
 
     print(f"{optimised_goal.text}")
 
-
 if __name__ == "__main__":
     main()
