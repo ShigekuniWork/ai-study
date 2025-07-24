@@ -16,10 +16,8 @@ async def run_mcp_task(prompt: str):
 
         tools_raw = await tools_spec.to_tool_list_async()
 
-        # ↓修正①: `List[BaseTool]`として明示（Pylance警告回避）
         tools = cast(List[BaseTool], tools_raw)
 
-        # Ollama ローカル LLM
         llm = Ollama(model="llama3:instruct", request_timeout=60)
 
         # ReActAgentの初期化（新しいworkflow版）
@@ -30,7 +28,6 @@ async def run_mcp_task(prompt: str):
             max_iterations=3,
         )
 
-        # チャット実行（workflow版ReActAgentではrunメソッドを使用）
         workflow_result = await agent.run(prompt)
         response = workflow_result
         print(">>", response)
